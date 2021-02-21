@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Daily Quotes</string>
+
+    <string name="api_key">CgB6e3x9248bVgJsoTDIVWkHvFie/NifAjnms6rJWOkUdwpo302u/9RNoBUhjFiO+KFfcZxxp7HiyxJfPUL2weVC</string>
+    <string name="app_secret">aa137b6d589bc5e90c47550afd649a8aa4075e5b0be40a88f442db14617ab6f6</string>
+    <string name="client_key">218C290C1ADDE3780445D95929B75A160869DC9CA53B5D5F3750D9E97CDC4DA4</string>
+    <string name="ad_app_id">103853829</string>
+
+    <string name="huawei_ads_banner_test">testw6vs28auh3</string>
+
+    <string name="huawei_ads_banner_main">s75xy3k9g2</string>
+    <string name="huawei_ads_banner_settings">a5qwn83fm7</string>
+    <string name="huawei_ads_splash">p52abh145k</string>
+    <string name="huawei_ads_fullscreen_main">n19556t4g0</string>
+
+
+    <string name="google_app_id">ca-app-pub-8063240213539897~4650103945</string>
+    <string name="google_ads_banner_main">ca-app-pub-8063240213539897/9136143860</string>
+    <string name="google_ads_banner_settings">ca-app-pub-8063240213539897/7248347129</string>
+    <string name="google_ads_instertitial_main">ca-app-pub-8063240213539897/2387451421</string>
+
+    <string name="translate">Select auto translate language;</string>
+    <string name="contiune_without_auto_translate">Contiune without auto translate</string>
+    <string name="contiune_with_xxx">Contiune with</string>
+    <string name="notification_title">Quote of Day!</string>
+    <string name="notification_description">Tap to see the new quote</string>
+    <string name="your_favorites">Your favorite quotes:</string>
+    <string name="no_favorite">You didn\'t add favorite yet</string>
+    <string name="language_saved">Selected language was saved</string>
+</resources>

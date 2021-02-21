@@ -1,0 +1,2 @@
+rootProject.name = "Daily Quotes (Eng)"
+include ':app'

@@ -1,0 +1,150 @@
+[
+  {
+    "Language": "Arabic",
+    "Code": "ar"
+  },
+  {
+    "Language": "Danish",
+    "Code": "da"
+  },
+  {
+    "Language": "German",
+    "Code": "de"
+  },
+  {
+    "Language": "Spanish",
+    "Code": "es"
+  },
+  {
+    "Language": "Finnish",
+    "Code": "fi"
+  },
+  {
+    "Language": "French",
+    "Code": "fr"
+  },
+  {
+    "Language": "Italian",
+    "Code": "it"
+  },
+  {
+    "Language": "Japanese",
+    "Code": "ja"
+  },
+  {
+    "Language": "Korean",
+    "Code": "ko"
+  },
+  {
+    "Language": "Polish",
+    "Code": "pl"
+  },
+  {
+    "Language": "Portuguese",
+    "Code": "pt"
+  },
+  {
+    "Language": "Russian",
+    "Code": "ru"
+  },
+  {
+    "Language": "Swedish",
+    "Code": "sv"
+  },
+  {
+    "Language": "Thai",
+    "Code": "th"
+  },
+  {
+    "Language": "Turkish",
+    "Code": "tr"
+  },
+  {
+    "Language": "Chinese",
+    "Code": "zh"
+  },
+  {
+    "Language": "Traditional Chinese",
+    "Code": "zh-HK"
+  },
+  {
+    "Language": "Malay",
+    "Code": "ms"
+  },
+  {
+    "Language": "Norwegian",
+    "Code": "no"
+  },
+  {
+    "Language": "Vietnamese",
+    "Code": "vi"
+  },
+  {
+    "Language": "Czech",
+    "Code": "cs"
+  },
+  {
+    "Language": "Greek",
+    "Code": "el"
+  },
+  {
+    "Language": "Hebrew",
+    "Code": "he"
+  },
+  {
+    "Language": "Hindi",
+    "Code": "hi"
+  },
+  {
+    "Language": "Indonesian",
+    "Code": "id"
+  },
+  {
+    "Language": "Romanian",
+    "Code": "ro"
+  },
+  {
+    "Language": "Serbian",
+    "Code": "sr"
+  },
+  {
+    "Language": "Tagalog",
+    "Code": "tl"
+  },
+  {
+    "Language": "Central Khmer",
+    "Code": "km"
+  },
+  {
+    "Language": "Burmese",
+    "Code": "my"
+  },
+  {
+    "Language": "Tamil",
+    "Code": "ta"
+  },
+  {
+    "Language": "Hungarian",
+    "Code": "hu"
+  },
+  {
+    "Language": "Dutch",
+    "Code": "nl"
+  },
+  {
+    "Language": "Persian",
+    "Code": "fa"
+  },
+  {
+    "Language": "Slovak",
+    "Code": "sk"
+  },
+  {
+    "Language": "Estonian",
+    "Code": "et"
+  },
+  {
+    "Language": "Latvian",
+    "Code": "lv"
+  }
+]
