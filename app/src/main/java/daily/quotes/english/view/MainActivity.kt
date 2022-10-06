@@ -8,16 +8,21 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+/*
 import com.huawei.hms.ads.*
 import com.huawei.hms.ads.banner.BannerView
 import com.huawei.hms.mlsdk.common.MLApplication
 import com.huawei.hms.mlsdk.common.MLException
 import com.huawei.hms.mlsdk.translate.MLTranslatorFactory
 import com.huawei.hms.mlsdk.translate.cloud.MLRemoteTranslateSetting
+ */
 import daily.quotes.english.*
 import daily.quotes.english.model.QuoteModel
 import daily.quotes.english.work.WorkManagerPeriodic
@@ -57,7 +62,7 @@ var imageFavorite: ImageView? = null
 @SuppressLint("StaticFieldLeak")
 var imageSettings: ImageView? = null
 
-private var interstitialAd: InterstitialAd? = null
+private var mInterstitialAd: InterstitialAd? = null
 
 class MainActivity : BaseActivity() {
 
@@ -67,11 +72,13 @@ class MainActivity : BaseActivity() {
 
         setUI()
 
+        /*
         if (Util().isHmsAvailable(applicationContext)) {
             setHMSAds()
         } else {
-            setGMSAds()
         }
+         */
+        setGMSAds()
 
         // Get all quotes
         quotesString = Util().getJsonDataFromAsset(this, "quotes.json")
@@ -138,7 +145,7 @@ class MainActivity : BaseActivity() {
         selectedLanguageCode = sharedPreferences!!.getString("languageCode", null)
         if (selectedLanguage != null) {
             // Translate
-            translate(quote)
+            //translate(quote)
         }
 
     }
@@ -168,6 +175,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun translate(quote: String) {
+        /*
         // Set the API key.
         MLApplication.getInstance().setApiKey(getString(R.string.api_key));
 
@@ -193,8 +201,12 @@ class MainActivity : BaseActivity() {
                 Log.e(TAG, "Translate Except Error: ${error}")
             }
         }
+         */
+
+        Toast.makeText(this, getString(R.string.this_function_is_not_available), Toast.LENGTH_SHORT).show()
     }
 
+    /*
     private fun setHMSAds() {
         Log.i(TAG, "HMS ads is proccesing..")
 
@@ -235,6 +247,7 @@ class MainActivity : BaseActivity() {
         }
 
     }
+     */
 
     private fun setGMSAds() {
         Log.i(TAG, "GMS ads is proccesing..")
@@ -257,47 +270,45 @@ class MainActivity : BaseActivity() {
         }
 
         // GMS Interstitial Ad
-        val googleInterstitialAd: com.google.android.gms.ads.InterstitialAd = com.google.android.gms.ads.InterstitialAd(this)
-        googleInterstitialAd.adUnitId = getString(R.string.google_ads_instertitial_main)
-        googleInterstitialAd.loadAd(adRequest)
-        googleInterstitialAd.adListener = object : com.google.android.gms.ads.AdListener() {
-            override fun onAdLoaded() {
-                super.onAdLoaded()
-                googleInterstitialAd.show()
-                Log.i(TAG, "GMS Interstitial Ad Loaded!")
+        InterstitialAd.load(this, getString(R.string.google_ads_instertitial_main), adRequest, object : InterstitialAdLoadCallback() {
+            override fun onAdFailedToLoad(adError: LoadAdError) {
+                Log.d(TAG, "adError: ${adError?.toString()}")
+                mInterstitialAd = null
             }
 
-            override fun onAdFailedToLoad(adError: LoadAdError?) {
-                super.onAdFailedToLoad(adError)
-                Log.e(TAG, "GMS Interstitial Ad ErrorCode: ${adError}")
+            override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                Log.d(TAG, "Ad was loaded.")
+                mInterstitialAd = interstitialAd
+                mInterstitialAd?.apply { show(this@MainActivity) }
             }
-        }
+        })
     }
-
-    /*
-    fun startAlarmBroadcastReceiver(context: Context) {
-
-        // Intent
-        val _intent = Intent(context, AlarmBroadcastReceiver::class.java)
-
-        // Is alarm working
-        val isWorking = PendingIntent.getBroadcast(context, 0, _intent, PendingIntent.FLAG_NO_CREATE) != null
-        Log.d(TAG, "alarm is " + (if (isWorking) "" else "not") + " working...")
-
-        if (!isWorking) {
-            val pendingIntent = PendingIntent.getBroadcast(context, 0, _intent, PendingIntent.FLAG_CANCEL_CURRENT)
-            val alarmManager = context.getSystemService(ALARM_SERVICE) as AlarmManager
-            //alarmManager.cancel(pendingIntent)
-
-            val calendar = Calendar.getInstance()
-            calendar.timeInMillis = System.currentTimeMillis()
-            calendar[Calendar.HOUR_OF_DAY] = 13
-            calendar[Calendar.MINUTE] = 0
-            calendar[Calendar.SECOND] = 0
-            alarmManager[AlarmManager.RTC_WAKEUP, calendar.timeInMillis] = pendingIntent
-
-            Log.i(TAG, "Alarm was setted at 13:00 PM")
-        }
-    }
-    */
 }
+
+/*
+fun startAlarmBroadcastReceiver(context: Context) {
+
+    // Intent
+    val _intent = Intent(context, AlarmBroadcastReceiver::class.java)
+
+    // Is alarm working
+    val isWorking = PendingIntent.getBroadcast(context, 0, _intent, PendingIntent.FLAG_NO_CREATE) != null
+    Log.d(TAG, "alarm is " + (if (isWorking) "" else "not") + " working...")
+
+    if (!isWorking) {
+        val pendingIntent = PendingIntent.getBroadcast(context, 0, _intent, PendingIntent.FLAG_CANCEL_CURRENT)
+        val alarmManager = context.getSystemService(ALARM_SERVICE) as AlarmManager
+        //alarmManager.cancel(pendingIntent)
+
+        val calendar = Calendar.getInstance()
+        calendar.timeInMillis = System.currentTimeMillis()
+        calendar[Calendar.HOUR_OF_DAY] = 13
+        calendar[Calendar.MINUTE] = 0
+        calendar[Calendar.SECOND] = 0
+        alarmManager[AlarmManager.RTC_WAKEUP, calendar.timeInMillis] = pendingIntent
+
+        Log.i(TAG, "Alarm was setted at 13:00 PM")
+    }
+}
+}
+*/

@@ -6,9 +6,8 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.huawei.hms.mlsdk.common.MLApplication
 
-val TAG = "MRT"
+val TAG = "applog"
 var sharedPreferences:SharedPreferences ?= null
 
 open class BaseActivity: AppCompatActivity() {

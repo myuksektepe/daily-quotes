@@ -9,11 +9,6 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
-import com.huawei.hms.ads.AdListener
-import com.huawei.hms.ads.AdParam
-import com.huawei.hms.ads.BannerAdSize
-import com.huawei.hms.ads.HwAds
-import com.huawei.hms.ads.banner.BannerView
 import daily.quotes.english.*
 import daily.quotes.english.adapter.QuoteModelListAdapter
 import daily.quotes.english.model.QuoteModel
@@ -46,12 +41,13 @@ class SettingsActivity : BaseActivity() {
         setContentView(R.layout.activity_settings)
 
         setUI()
-
+        setGMSAds()
+        /*
         if (Util().isHmsAvailable(applicationContext)) {
             setHMSAds()
         } else {
-            setGMSAds()
         }
+         */
 
         // Go Back
         imageGoBack!!.setOnClickListener {
@@ -133,6 +129,7 @@ class SettingsActivity : BaseActivity() {
         listViewFavorites = findViewById(R.id.listViewFavorites)
     }
 
+    /*
     private fun setHMSAds() {
         Log.i(TAG, "HMS ads is proccesing..")
 
@@ -158,6 +155,8 @@ class SettingsActivity : BaseActivity() {
             }
         }
     }
+     */
+
 
     private fun setGMSAds() {
         Log.i(TAG, "GMS ads is proccesing..")

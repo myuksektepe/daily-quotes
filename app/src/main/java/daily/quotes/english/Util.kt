@@ -1,9 +1,8 @@
 package daily.quotes.english
 
+//import com.huawei.hms.api.ConnectionResult
+//import com.huawei.hms.api.HuaweiApiAvailability
 import android.content.Context
-import android.util.Log
-import com.huawei.hms.api.ConnectionResult
-import com.huawei.hms.api.HuaweiApiAvailability
 import java.io.IOException
 
 
@@ -20,6 +19,7 @@ class Util {
         return jsonString
     }
 
+    /*
     fun isHmsAvailable(context: Context?): Boolean {
         var isAvailable = false
         if (null != context) {
@@ -29,6 +29,7 @@ class Util {
         Log.i(TAG, "isHmsAvailable: $isAvailable")
         return isAvailable
     }
+     */
 
     /*
     fun isGmsAvailable(context: Context?): Boolean {

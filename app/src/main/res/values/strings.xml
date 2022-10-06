@@ -27,4 +27,5 @@
     <string name="your_favorites">Your favorite quotes:</string>
     <string name="no_favorite">You didn\'t add favorite yet</string>
     <string name="language_saved">Selected language was saved</string>
+    <string name="this_function_is_not_available">This function is not available for now!</string>
 </resources>
