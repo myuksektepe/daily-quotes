@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.gitlab.developerdeveloperdeveloper:androidutilslibrary:1.0.0@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/0582ba75fbaa120a8f5fcedaab08d46e/transformed/androidutilslibrary-1.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/0582ba75fbaa120a8f5fcedaab08d46e/transformed/androidutilslibrary-1.0.0/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.gitlab.developerdeveloperdeveloper/androidutilslibrary/1.0.0/c542678d34be3457175b48aa54b47c4d44f354c8/androidutilslibrary-1.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
