@@ -15,14 +15,6 @@ import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
-/*
-import com.huawei.hms.ads.*
-import com.huawei.hms.ads.banner.BannerView
-import com.huawei.hms.mlsdk.common.MLApplication
-import com.huawei.hms.mlsdk.common.MLException
-import com.huawei.hms.mlsdk.translate.MLTranslatorFactory
-import com.huawei.hms.mlsdk.translate.cloud.MLRemoteTranslateSetting
- */
 import daily.quotes.english.*
 import daily.quotes.english.model.QuoteModel
 import daily.quotes.english.work.WorkManagerPeriodic
@@ -71,20 +63,11 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
 
         setUI()
-
-        /*
-        if (Util().isHmsAvailable(applicationContext)) {
-            setHMSAds()
-        } else {
-        }
-         */
         setGMSAds()
 
         // Get all quotes
         quotesString = Util().getJsonDataFromAsset(this, "quotes.json")
         getRandomQuote()
-
-        //startAlarmBroadcastReceiver(applicationContext)
 
         WorkManagerPeriodic().setWork()
     }
@@ -145,7 +128,6 @@ class MainActivity : BaseActivity() {
         selectedLanguageCode = sharedPreferences!!.getString("languageCode", null)
         if (selectedLanguage != null) {
             // Translate
-            //translate(quote)
         }
 
     }
@@ -173,81 +155,6 @@ class MainActivity : BaseActivity() {
             isFavorite = true
         }
     }
-
-    private fun translate(quote: String) {
-        /*
-        // Set the API key.
-        MLApplication.getInstance().setApiKey(getString(R.string.api_key));
-
-        val setting = MLRemoteTranslateSetting.Factory()
-            .setSourceLangCode("en")
-            .setTargetLangCode(selectedLanguageCode)
-            .create()
-
-        val mlRemoteTranslator = MLTranslatorFactory.getInstance().getRemoteTranslator(setting)
-
-        val task = mlRemoteTranslator.asyncTranslate(quote)
-        task.addOnSuccessListener {
-            txtQuoteTranslate!!.text = it
-            linearTranslate!!.visibility = View.VISIBLE
-        }.addOnFailureListener { e ->
-            linearTranslate!!.visibility = View.GONE
-            try {
-                val mlException = e as MLException
-                val errorCode = mlException.errCode
-                val errorMessage = mlException.message
-                Log.e(TAG, "Translate Error: ${errorMessage}")
-            } catch (error: Exception) {
-                Log.e(TAG, "Translate Except Error: ${error}")
-            }
-        }
-         */
-
-        Toast.makeText(this, getString(R.string.this_function_is_not_available), Toast.LENGTH_SHORT).show()
-    }
-
-    /*
-    private fun setHMSAds() {
-        Log.i(TAG, "HMS ads is proccesing..")
-
-        HwAds.init(this)
-        val adParam = AdParam.Builder().build()
-
-        // Banner Ad Init
-        val huaweiBannerAdMain: BannerView = findViewById(R.id.huaweiBannerAdMain)
-        huaweiBannerAdMain.adId = getString(R.string.huawei_ads_banner_main)
-        huaweiBannerAdMain.bannerAdSize = BannerAdSize.BANNER_SIZE_360_144
-
-        // Interstitial Ad Init
-        interstitialAd = InterstitialAd(this)
-        interstitialAd!!.adId = getString(R.string.huawei_ads_fullscreen_main)
-        interstitialAd!!.loadAd(adParam)
-
-        // Load banner ad
-        huaweiBannerAdMain.loadAd(adParam)
-        huaweiBannerAdMain.adListener = object : AdListener() {
-            override fun onAdLoaded() {
-                super.onAdLoaded()
-                Log.i(TAG, "HMS Main Banner Ad Loaded!")
-                huaweiBannerAdMain.visibility = View.VISIBLE
-            }
-
-            override fun onAdFailed(errorCode: Int) {
-                super.onAdFailed(errorCode)
-                Log.e(TAG, "HMS Main Banner Ad ErrorCode: ${errorCode}")
-                setGMSAds()
-            }
-        }
-
-        // Load Interstitial ads
-        if (interstitialAd != null && interstitialAd!!.isLoaded) {
-            interstitialAd!!.show()
-        } else {
-            Log.i(TAG, "HMS Interstitial Ad is not loaded")
-        }
-
-    }
-     */
 
     private fun setGMSAds() {
         Log.i(TAG, "GMS ads is proccesing..")
@@ -284,31 +191,3 @@ class MainActivity : BaseActivity() {
         })
     }
 }
-
-/*
-fun startAlarmBroadcastReceiver(context: Context) {
-
-    // Intent
-    val _intent = Intent(context, AlarmBroadcastReceiver::class.java)
-
-    // Is alarm working
-    val isWorking = PendingIntent.getBroadcast(context, 0, _intent, PendingIntent.FLAG_NO_CREATE) != null
-    Log.d(TAG, "alarm is " + (if (isWorking) "" else "not") + " working...")
-
-    if (!isWorking) {
-        val pendingIntent = PendingIntent.getBroadcast(context, 0, _intent, PendingIntent.FLAG_CANCEL_CURRENT)
-        val alarmManager = context.getSystemService(ALARM_SERVICE) as AlarmManager
-        //alarmManager.cancel(pendingIntent)
-
-        val calendar = Calendar.getInstance()
-        calendar.timeInMillis = System.currentTimeMillis()
-        calendar[Calendar.HOUR_OF_DAY] = 13
-        calendar[Calendar.MINUTE] = 0
-        calendar[Calendar.SECOND] = 0
-        alarmManager[AlarmManager.RTC_WAKEUP, calendar.timeInMillis] = pendingIntent
-
-        Log.i(TAG, "Alarm was setted at 13:00 PM")
-    }
-}
-}
-*/

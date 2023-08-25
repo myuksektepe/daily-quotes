@@ -42,12 +42,6 @@ class SettingsActivity : BaseActivity() {
 
         setUI()
         setGMSAds()
-        /*
-        if (Util().isHmsAvailable(applicationContext)) {
-            setHMSAds()
-        } else {
-        }
-         */
 
         // Go Back
         imageGoBack!!.setOnClickListener {
@@ -128,35 +122,6 @@ class SettingsActivity : BaseActivity() {
         txtNoFavorite = findViewById(R.id.txtNoFavorite)
         listViewFavorites = findViewById(R.id.listViewFavorites)
     }
-
-    /*
-    private fun setHMSAds() {
-        Log.i(TAG, "HMS ads is proccesing..")
-
-        HwAds.init(this)
-        val adParam = AdParam.Builder().build()
-
-        val huaweiBannerAdSettings: BannerView = findViewById(R.id.huaweiBannerAdSettings)
-        huaweiBannerAdSettings.adId = getString(R.string.huawei_ads_banner_settings)
-        huaweiBannerAdSettings.bannerAdSize = BannerAdSize.BANNER_SIZE_360_57
-        huaweiBannerAdSettings.loadAd(adParam)
-
-        huaweiBannerAdSettings.adListener = object : AdListener() {
-            override fun onAdLoaded() {
-                super.onAdLoaded()
-                Log.i(TAG, "HMS Settings Banner Ad Loaded!")
-                huaweiBannerAdSettings.visibility = View.VISIBLE
-            }
-
-            override fun onAdFailed(errorCode: Int) {
-                super.onAdFailed(errorCode)
-                Log.e(TAG, "HMS Settings Banner Ad ErrorCode: ${errorCode}")
-                setGMSAds()
-            }
-        }
-    }
-     */
-
 
     private fun setGMSAds() {
         Log.i(TAG, "GMS ads is proccesing..")
