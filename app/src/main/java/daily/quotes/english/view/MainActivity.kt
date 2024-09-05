@@ -8,15 +8,22 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.interstitial.InterstitialAd
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
-import daily.quotes.english.*
+import com.google.mlkit.common.model.DownloadConditions
+import com.google.mlkit.nl.translate.TranslateLanguage
+import com.google.mlkit.nl.translate.Translation
+import com.google.mlkit.nl.translate.TranslatorOptions
+import daily.quotes.english.BaseActivity
+import daily.quotes.english.R
+import daily.quotes.english.SharedPreferenceFavorites
+import daily.quotes.english.TAG
+import daily.quotes.english.Util
 import daily.quotes.english.model.QuoteModel
+import daily.quotes.english.sharedPreferences
 import daily.quotes.english.work.WorkManagerPeriodic
 import org.json.JSONArray
 import org.json.JSONObject
@@ -72,7 +79,7 @@ class MainActivity : BaseActivity() {
         WorkManagerPeriodic().setWork()
     }
 
-    fun setUI() {
+    private fun setUI() {
         linearTranslate = findViewById(R.id.linearTranslate)
         imageRefresh = findViewById(R.id.imageRefresh)
         imageFavorite = findViewById(R.id.imageFavorite)
@@ -123,13 +130,11 @@ class MainActivity : BaseActivity() {
         }
 
         // ...
-        sharedPreferences = this.getSharedPreferences(packageName, android.content.Context.MODE_PRIVATE)
+        sharedPreferences =
+            this.getSharedPreferences(packageName, android.content.Context.MODE_PRIVATE)
         selectedLanguage = sharedPreferences!!.getString("language", null)
         selectedLanguageCode = sharedPreferences!!.getString("languageCode", null)
-        if (selectedLanguage != null) {
-            // Translate
-        }
-
+        selectedLanguageCode?.let { setTranslator(it, quote) }
     }
 
     private fun checkFavorite() {
@@ -145,12 +150,18 @@ class MainActivity : BaseActivity() {
     private fun toggleFavorite() {
         if (isFavorite) {
             // Remove favorite
-            SharedPreferenceFavorites().removeFavorite(applicationContext, QuoteModel(quoteID, quote, author))
+            SharedPreferenceFavorites().removeFavorite(
+                applicationContext,
+                QuoteModel(quoteID, quote, author)
+            )
             imageFavorite!!.setImageResource(R.drawable.ic_baseline_favorite_border_24)
             isFavorite = false
         } else {
             // Add favorite
-            SharedPreferenceFavorites().addFavorite(applicationContext, QuoteModel(quoteID, quote, author))
+            SharedPreferenceFavorites().addFavorite(
+                applicationContext,
+                QuoteModel(quoteID, quote, author)
+            )
             imageFavorite!!.setImageResource(R.drawable.ic_baseline_favorite_24)
             isFavorite = true
         }
@@ -172,14 +183,15 @@ class MainActivity : BaseActivity() {
             }
 
             override fun onAdFailedToLoad(adError: LoadAdError) {
-                Log.e(TAG, "GMS Main Banner Ad ErrorCode: ${adError}")
+                Log.e(TAG, "GMS Main Banner Ad ErrorCode: $adError")
             }
         }
 
         // GMS Interstitial Ad
+        /*
         InterstitialAd.load(this, getString(R.string.google_ads_instertitial_main), adRequest, object : InterstitialAdLoadCallback() {
             override fun onAdFailedToLoad(adError: LoadAdError) {
-                Log.d(TAG, "adError: ${adError?.toString()}")
+                Log.d(TAG, "adError: $adError")
                 mInterstitialAd = null
             }
 
@@ -189,5 +201,39 @@ class MainActivity : BaseActivity() {
                 mInterstitialAd?.apply { show(this@MainActivity) }
             }
         })
+         */
+    }
+
+    private fun setTranslator(
+        selectedLanguage: String,
+        text: String
+    ) {
+        val options = TranslatorOptions.Builder()
+            .setSourceLanguage(TranslateLanguage.ENGLISH)
+            .setTargetLanguage(selectedLanguage)
+            .build()
+        val translator = Translation.getClient(options)
+
+        val conditions = DownloadConditions.Builder()
+            .build()
+
+        translator.downloadModelIfNeeded(conditions)
+            .addOnSuccessListener {
+
+                // Translate !
+                translator.translate(text)
+                    .addOnSuccessListener { translatedText ->
+                        txtQuoteTranslate!!.text = translatedText
+                        linearTranslate!!.visibility = View.VISIBLE
+                    }
+                    .addOnFailureListener { exception ->
+                        Log.e(TAG, "translate: ${exception.message}")
+                        linearTranslate!!.visibility = View.GONE
+                    }
+
+            }
+            .addOnFailureListener { exception ->
+                Log.e(TAG, "downloadModelIfNeeded: ${exception.message}")
+            }
     }
 }
